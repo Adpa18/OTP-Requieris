@@ -1,5 +1,5 @@
  # Build
- [Github Build](https://adpa18.github.io/otp-manager/)
+ [Github Build](https://github.com/Adpa18/otp-manager)
 
 # HOTP (HMAC-Based One-Time Password)
 
