@@ -36,7 +36,7 @@
 
 * Truncating the HMAC-SHA-1 value to a shorter value makes a brute force attack possible. Therefore, the authentication server needs to detect and stop brute force attacks.
 * We RECOMMEND setting a throttling parameter T, which defines the maximum number of possible attempts for One-Time Password validation. The validation server manages individual counters per HOTP device in order to take note of any failed attempt.  We RECOMMEND T not to be too large, particularly if the resynchronization method used on the server is window-based, and the window size is large.  T SHOULD be set as low as possible, while still ensuring that usability is not significantly impacted.
-* Another option would be to implement a delay scheme to avoid a brute force attack.  After each failed attempt A, the authentication server would wait for an increased T times A number of seconds, e.g., say T = 5, then after 1 attempt, the server waits for 5 seconds, at the second failed attempt, it waits for 5 times 2 = 10 seconds, etc. 
+* Another option would be to implement a delay scheme to avoid a brute force attack.  After each failed attempt A, the authentication server would wait for an increased T times A number of seconds, e.g., say T = 5, then after 1 attempt, the server waits for 5 seconds, at the second failed attempt, it waits for 5 times 2 = 10 seconds, etc.
 * The delay or lockout schemes MUST be across login sessions to prevent attacks based on multiple parallel guessing techniques.
 
 ## Resynchronization of the Counter
@@ -71,3 +71,75 @@
 * T is an integer and represents the number of time steps between the initial counter time T0 and the current Unix time
 * T = (Current Unix time - T0) / X // where the default floor function is used in the computation
 * T must support a time value larger than a 32-bit integer.
+
+# Bonus
+* webApp
+    * HTTPS
+    * Auto-lock PIN
+    * Cipher localStorage
+    * Account
+        * multi
+        * remove
+        * Configurable
+            * TOTP / HOTP
+        	* SHA1 / SHA-256 / SHA-512
+        	* Validity / Start / Length
+        	* Google Mode Compatibility
+        * QR Code Generator
+        * Copy to Clipboard
+    * Connect to Server
+    * Responsive Design
+    * Quick and Secure access
+* mobileApp
+    * Account
+        * multi
+        * remove
+        * Configurable
+            * TOTP / HOTP
+            * SHA1 / SHA-256 / SHA-512
+            * Validity / Start / Length
+            * Google Mode Compatibility
+        * QR Code Scanner
+        * Connect to Server
+* Common webApp / mobileApp
+    * Reimplementation of base32 (thirty-two) for angular2
+    * recode of TOTP /HOTP in pure JS (web) no nodeJS
+    * Abstraction of OTPManager, LoginOTP
+* Server
+    * HTTPS / TLS
+    * Serve website and direct access to databases
+    * accounts
+        * cihper database
+        * password hash (bcrypt) in database
+        * sign_in
+        * sign_up
+    * Secrets
+        * cipher database for each user
+        * add
+        * remove
+        * list
+
+* Online WebApp
+* Binaries
+    * Linux 32 / 64 bits
+        * AppImage
+        * Deb
+        * RPM
+        * FreeBSD
+        * 7z
+        * zip
+        * tar.xz
+        * tar.lz
+        * tar.gz
+        * tar.bz2
+    * Windows 32 / 64 bits
+        * exe
+        * msi
+        * zip
+    * MacOS
+        * dmg
+        * pkg
+    * Android
+        * apk
+    * iOS (not build)
+    * Windows Universal Apps (not build)
