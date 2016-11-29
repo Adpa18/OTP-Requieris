@@ -1,3 +1,6 @@
+ # Build
+ [Github Build](https://adpa18.github.io/otp-manager/)
+
 # HOTP (HMAC-Based One-Time Password)
 
 * HOTP algorithm is based on an increasing counter value and a static symmetric key known only to the token and the validation service.
@@ -73,73 +76,52 @@
 * T must support a time value larger than a 32-bit integer.
 
 # Bonus
-* webApp
-    * HTTPS
+* web + desktop + mobile + TV
+    * Accès en HTTPS
     * Auto-lock PIN
-    * Cipher localStorage
-    * Account
-        * multi
-        * remove
-        * Configurable
-            * TOTP / HOTP
-        	* SHA1 / SHA-256 / SHA-512
-        	* Validity / Start / Length
-        	* Google Mode Compatibility
-        * QR Code Generator
-        * Copy to Clipboard
-    * Connect to Server
     * Responsive Design
-    * Quick and Secure access
-* mobileApp
-    * Account
-        * multi
-        * remove
-        * Configurable
-            * TOTP / HOTP
-            * SHA1 / SHA-256 / SHA-512
-            * Validity / Start / Length
-            * Google Mode Compatibility
-        * QR Code Scanner
-        * Connect to Server
-* Common webApp / mobileApp
-    * Reimplementation of base32 (thirty-two) for angular2
-    * recode of TOTP /HOTP in pure JS (web) no nodeJS
-    * Abstraction of OTPManager, LoginOTP
-* Server
-    * HTTPS / TLS
-    * Serve website and direct access to databases
-    * accounts
-        * cihper database
-        * password hash (bcrypt) in database
-        * sign_in
-        * sign_up
-    * Secrets
-        * cipher database for each user
-        * add
-        * remove
-        * list
-
-* Online WebApp
-* Binaries
+    * Réimplémentation du module base32 (thirty-two) pour angular2
+    * Adaptation des algorithmes TOTP/HOTP en Javascript coté client (dans le navigateur)
+    * Réutilisation du code entre OTPManager et LoginOTP
+    * Multi-comptes
+    * Configuration (type algo OTP, algo de hashage, validité, début, longueur)
+    * Compatible avec Google
+    * Hébergé publiquement en ligne
+    * QR Code Scanner/Générateur
+    * Connection au server
+    * Copie du code OTP dans le presse papier
+    * Accès rapide et sécurisé
+    * Stockage des informations dans le localStorage du navigateur de manière chiffré
+* Server de données
+    * Accessible en HTTPS
+    * Permet de récupérer les données des comptes et d'en créer
+    * Multi-utilisateur
+    * Base de données chiffrées avec stockage des hashs des mots de passes hashé avec bcrypt
+    * Permet de créer un compte et de s'y connecter
+* Paquets Client lourd
     * Linux 32 / 64 bits
-        * AppImage
-        * Deb
-        * RPM
-        * FreeBSD
-        * 7z
-        * zip
-        * tar.xz
-        * tar.lz
-        * tar.gz
-        * tar.bz2
+        * AppImage, Deb, RPM, FreeBSD, archives compréssées
     * Windows 32 / 64 bits
-        * exe
-        * msi
-        * zip
+        * exe, msi, zip, Windows Universal Apps (not build)
     * MacOS
-        * dmg
-        * pkg
+        * dmg, pkg
     * Android
         * apk
     * iOS (not build)
-    * Windows Universal Apps (not build)
+    * WebOS
+        * ipk
+
+* Création d'un module bien documenté nodeJS myotp RFC ++compliant (Look Ahead Window, time offset, algorithmes de hachage sha1, sha256, sha512)
+* Implémentation de 3 méthodes par type d'algo OTP
+	* generate (Valeurs par défaut proposé, compatible avec Google)
+	* verify (affiche le delta entre les 2 tokens, et est timing attack safe)
+	* generateKeyUri (génération de la chaîne de caractère permettant de générer un QR code)
+* Création d'un serveur de validation OTP
+	* RFC
+	* API REST
+	* CRUD
+	* Accès en HTTPS
+	* DB chiffré avec sqlcipher
+	* Authentification
+	* Un utilisateur peut avoir plusieurs comptes avec un mote de passe différent pour chacun
+	* Intégration PAM
